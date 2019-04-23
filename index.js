@@ -13,4 +13,14 @@ readStream.on('end', ()=>{
 readStream.on('error', (error)=>{
     console.log('an error has occure');
     console.log(error);
+})  
+
+readStream.pause()
+process.stdin.on('data',(chunk)=>{
+    if(chunk.toString().trim() === 'finish'){
+        readStream.resume();
+    }
+//   var text = chunk.toString().trim();
+//   console.log('echo :', text);
+      readStream.read();
 })
