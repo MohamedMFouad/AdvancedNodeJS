@@ -1,6 +1,6 @@
-const { createReadStream } = require('fs');
-const readStream = createReadStream('../../powder-day.mp4');
-
+const { createReadStream, createWriteStream } = require('fs');
+const readStream = createReadStream('./powder-day.mp4');
+const writeStream = createWriteStream('./copy.mp4');
 readStream.on('data', (chunk) => {
     console.log('size: ', chunk.length);
 });
@@ -12,3 +12,7 @@ readStream.on('error', (error) => {
 readStream.on('end', () => {
     console.log('done!');
 });
+
+writeStream.on('close',()=>{
+    process.stdout.write('file copied\n');
+})
